@@ -37,4 +37,4 @@ Egypt holds a wealth of historical and cultural sites that are significant to wo
 
 ---  
 
-> 📌 Feel free to contribute to this project! Fork, clone, and submit pull requests to help improve Ancient Aura.  
+ 
