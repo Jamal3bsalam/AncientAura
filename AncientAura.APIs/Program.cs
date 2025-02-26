@@ -1,9 +1,12 @@
 
+using AncientAura.Repository.Data.Contexts;
+using Microsoft.EntityFrameworkCore;
+
 namespace AncientAura.APIs
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public async static Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +17,30 @@ namespace AncientAura.APIs
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddDbContext<AncientAuraDbContext>(option =>
+            {
+                option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
+
             var app = builder.Build();
+
+            //return group of isercieseScope work with liftime scope 
+            // Ê»„« «‰ «· stroe dbcontext ‘€«·Â scope › Â —Ã⁄Â«  
+            using var scope = app.Services.CreateScope();
+            var services = scope.ServiceProvider;
+            // return object from storeDbContext .
+            var context = services.GetRequiredService<AncientAuraDbContext>();
+            try
+            {
+                // Update DataBase && Apply Migrations
+                await context.Database.MigrateAsync();
+            }
+            catch (Exception ex)
+            {
+                var loggerfactory = services.GetRequiredService<ILoggerFactory>();
+                var logger = loggerfactory.CreateLogger<Program>();
+                logger.LogError(ex, "there are problems during apply migrations");
+            }
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
