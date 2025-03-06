@@ -14,6 +14,7 @@ namespace AncientAura.Core.Entities.Identity
     {
         public string? FullName { get; set; }
         public string? ProfileImage { get; set; }
+        public string? Bio { get; set; }
 
         public ICollection<Post>? Posts { get; set; } = new List<Post>(); // Navigation Property
         public ICollection<Comment>? Comments { get; set; } = new List<Comment>();
@@ -23,6 +24,7 @@ namespace AncientAura.Core.Entities.Identity
         public ICollection<Game>? Games { get; set; } = new List<Game>();
         public ICollection<Answer>? Answers { get; set; } = new List<Answer>();
         public ICollection<Practice>? Practices { get; set; } = new List<Practice>();
+        public ICollection<Links>? Links { get; set; } = new List<Links>();
 
     }
 }

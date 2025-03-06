@@ -4,6 +4,7 @@ using AncientAura.Repository.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AncientAura.Repository.Data.Migrations
 {
     [DbContext(typeof(AncientAuraDbContext))]
-    partial class AncientAuraDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250305145019_UpdateUserTable")]
+    partial class UpdateUserTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -534,27 +537,6 @@ namespace AncientAura.Repository.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("AncientAura.Core.Entities.Identity.Links", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Link")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AppUserId");
-
-                    b.ToTable("Links");
-                });
-
             modelBuilder.Entity("AncientAura.Core.Entities.ImageURLs", b =>
                 {
                     b.Property<int>("Id")
@@ -944,16 +926,6 @@ namespace AncientAura.Repository.Data.Migrations
                     b.Navigation("Question");
                 });
 
-            modelBuilder.Entity("AncientAura.Core.Entities.Identity.Links", b =>
-                {
-                    b.HasOne("AncientAura.Core.Entities.Identity.AppUser", "AppUser")
-                        .WithMany("Links")
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.Navigation("AppUser");
-                });
-
             modelBuilder.Entity("AncientAura.Core.Entities.ImageURLs", b =>
                 {
                     b.HasOne("AncientAura.Core.Entities.AncientSites", "AncientSites")
@@ -1128,8 +1100,6 @@ namespace AncientAura.Repository.Data.Migrations
                     b.Navigation("Comments");
 
                     b.Navigation("Games");
-
-                    b.Navigation("Links");
 
                     b.Navigation("Posts");
 

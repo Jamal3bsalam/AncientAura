@@ -14,4 +14,8 @@
     <ProjectReference Include="..\AncientAura.Core\AncientAura.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\DataSeed\" />
+  </ItemGroup>
+
 </Project>

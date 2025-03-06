@@ -35,6 +35,7 @@ namespace AncientAura.Repository.Data.Contexts
         public DbSet<Videos> Videos { get; set; }
         public DbSet<ImageURLs> ImageURLs { get; set; }
         public DbSet<Reviews> Reviews { get; set; }
+        public DbSet<Links> Links { get; set; }
 
         //Community DbSets
         public DbSet<Post> Posts { get; set; }
